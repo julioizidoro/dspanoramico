@@ -6,15 +6,21 @@
 package br.com.wspanoramico.webservice;
 
 import br.com.wspanoramico.bean.PassaporteBean;
+import br.com.wspanoramico.dao.BancoDao;
 import br.com.wspanoramico.dao.ClienteDao;
 import br.com.wspanoramico.dao.ContasReceberDao;
 import br.com.wspanoramico.dao.ParametrosDao;
 import br.com.wspanoramico.dao.PassaporteDao;
+import br.com.wspanoramico.dao.RecebimentoDao;
+import br.com.wspanoramico.dao.UsuarioDao;
 import br.com.wspanoramico.managebean.SetarInformacoesPassaporteMB;
+import br.com.wspanoramico.model.Banco;
 import br.com.wspanoramico.model.Cliente;
 import br.com.wspanoramico.model.Contasreceber;
 import br.com.wspanoramico.model.Parametros;
 import br.com.wspanoramico.model.Passaporte;
+import br.com.wspanoramico.model.Recebimento;
+import br.com.wspanoramico.model.Usuario;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.ws.rs.core.Context;
@@ -48,6 +54,12 @@ public class VendasPassaporteResource {
     private Contasreceber contasreceber;
     @EJB
     private ContasReceberDao contasReceberDao;
+    @EJB
+    private BancoDao bancoDao;
+    @EJB
+    private UsuarioDao usuarioDao;
+    @EJB
+    private RecebimentoDao recebimentoDao;
 
     /**
      * Creates a new instance of VendasPassaporteResource
@@ -57,7 +69,7 @@ public class VendasPassaporteResource {
 
     /**
      * Retrieves representation of an instance of br.com.wspanoramico.webservice.VendasPassaporteResource
-     
+     * @param passaporteBean 
      * @return an instance of java.lang.String
      */
     @GET
@@ -96,5 +108,15 @@ public class VendasPassaporteResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void recebimentoPassaporte(Integer idcontasReceber) {
+        SetarInformacoesPassaporteMB setarInformacoesPassaporteMB = new SetarInformacoesPassaporteMB();
+        Contasreceber contasreceber = contasReceberDao.find(idcontasReceber);
+        parametros = parametrosDao.find(1);
+        Banco banco = bancoDao.find(parametros.getBanco());
+        Usuario usuario = usuarioDao.find(parametros.getUsuario());
+        if (contasreceber.getSituacao().equalsIgnoreCase("PAGO")) {
+            Recebimento recebimento = new Recebimento();
+            recebimento = setarInformacoesPassaporteMB.receberValorPassaporte(contasreceber, usuario, banco);
+            recebimentoDao.update(recebimento);
+        }
     }
 }
