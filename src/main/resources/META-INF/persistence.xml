@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="wspanoramicoPU" transaction-type="JTA">
+    <jta-data-source>java:/panoramico_DS</jta-data-source>
+    <class>br.com.wspanoramico.model.Acesso</class>
+    <class>br.com.wspanoramico.model.Ambiente</class>
+    <class>br.com.wspanoramico.model.Associado</class>
+    <class>br.com.wspanoramico.model.Associadoempresa</class>
+    <class>br.com.wspanoramico.model.Banco</class>
+    <class>br.com.wspanoramico.model.Cliente</class>
+    <class>br.com.wspanoramico.model.Contasreceber</class>
+    <class>br.com.wspanoramico.model.Dependente</class>
+    <class>br.com.wspanoramico.model.Empresa</class>
+    <class>br.com.wspanoramico.model.Evento</class>
+    <class>br.com.wspanoramico.model.Eventocancelamento</class>
+    <class>br.com.wspanoramico.model.Eventoconvidados</class>
+    <class>br.com.wspanoramico.model.Exame</class>
+    <class>br.com.wspanoramico.model.Exameassociado</class>
+    <class>br.com.wspanoramico.model.Exameconvidado</class>
+    <class>br.com.wspanoramico.model.Examedependente</class>
+    <class>br.com.wspanoramico.model.Medico</class>
+    <class>br.com.wspanoramico.model.Parametros</class>
+    <class>br.com.wspanoramico.model.Passaporte</class>
+    <class>br.com.wspanoramico.model.Passaportevalor</class>
+    <class>br.com.wspanoramico.model.Perfil</class>
+    <class>br.com.wspanoramico.model.Plano</class>
+    <class>br.com.wspanoramico.model.Planoconta</class>
+    <class>br.com.wspanoramico.model.Proprietario</class>
+    <class>br.com.wspanoramico.model.Recebimento</class>
+    <class>br.com.wspanoramico.model.Tipoenvento</class>
+    <class>br.com.wspanoramico.model.Usuario</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+    </properties>
+  </persistence-unit>
+</persistence>
